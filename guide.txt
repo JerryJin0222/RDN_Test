@@ -1,0 +1,40 @@
+训练：
+
+在 Matlab 中运行，./scripts/Prepare_TrainData_HR_LR.m生成具有相应退化模型和比例因子的 HR/LR 训练对。（注：请将生成的训练数据放入SSD（固态硬盘）以便快速训练）
+
+在Matlab中运行生成./results/Prepare_TestData_HR_LR.m具有相应退化模型和比例因子的HR/LR测试图像，并在训练时选择SR基准之一进行评估。
+
+./options/train/train_SRFBN_example.json根据您的需要进行编辑./options/train/README.md。
+
+然后，运行命令：
+
+cd SRFBN_CVPR19
+python train.py -opt options/train/train_SRFBN_example.json
+您可以在 中监控训练过程./experiments。
+
+测试：
+
+在标准 SR 基准测试上进行测试
+如果您已经克隆了此存储库并下载了我们的预训练模型，您可以首先从GoogleDrive或百度云（代码：z6nz）下载 SR 基准测试（Set5、Set14、B100、Urban100 和 Manga109）。
+
+在 Matlab 中运行，./results/Prepare_TestData_HR_LR.m生成具有不同退化模型的 HR/LR 图像。
+
+./options/test/test_SRFBN_example.json根据您的需要进行编辑./options/test/README.md。
+
+然后，运行命令：
+
+cd SRFBN_CVPR19
+python test.py -opt options/test/test_SRFBN_example.json
+python test.py -opt options/test/test_SRFBN_x4_BI.json
+最后，PSNR/SSIM 值显示在屏幕上，您可以在 中找到重建图像./results。您可以使用 进一步评估 SR 结果./results/Evaluate_PSNR_SSIM.m。
+
+在您自己的图像上进行测试
+如果您已克隆此存储库并下载了我们预先训练的模型，您可以首先将自己的图像放置到./results/LR/MyImage.
+
+./options/test/test_SRFBN_example.json根据您的需要进行编辑./options/test/README.md。
+
+然后，运行命令：
+
+cd SRFBN_CVPR19
+python test.py -opt options/test/test_SRFBN_example.json
+最后，您可以在 中找到重建图像./results。
